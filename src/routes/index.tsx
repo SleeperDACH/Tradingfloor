@@ -60,6 +60,8 @@ const traders = [
   { n: "Leon", r: "[Rolle, z. B. Futures-Trader]", a: ["[Funded Accounts]", "[Trading-Erfahrung seit …]", "[Auszahlungen]"] },
   { n: "Felix", r: "[Rolle]", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
   { n: "William", r: "Selbstständiger Futures-Trader", a: ["[Apex Trader Funding Accounts]", "[Mentor-Programm]", "[Weiterer Erfolg]"] },
+  { n: "Sophie", r: "[Rolle]", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
+  { n: "Lennard", r: "[Rolle]", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
 ];
 
 const stats = [
@@ -74,7 +76,7 @@ const included = [
   "[Live-Sessions & Trade-Reviews]",
   "Prop-Firm- & Risikomanagement-Austausch",
   "Trading-Psychologie & Disziplin",
-  "Direkter Kontakt zu Leon, Felix & William",
+  "Direkter Kontakt zu Leon, Felix, William, Sophie & Lennard",
 ];
 
 const faqs = [
@@ -180,9 +182,9 @@ function Index() {
             <Eyebrow>Das Team</Eyebrow>
             <h2 className="text-4xl md:text-5xl">Die Trader hinter Bersach</h2>
           </div>
-          <div className="mt-16 grid gap-6 md:grid-cols-3">
+          <div className="mt-16 flex flex-wrap justify-center gap-6">
             {traders.map((t) => (
-              <article key={t.n} className="reveal rounded-md border border-gold/40 p-8 text-center transition-colors hover:border-gold">
+              <article key={t.n} className="reveal w-full rounded-md border border-gold/40 p-8 md:w-[calc((100%-3rem)/3)] text-center transition-colors hover:border-gold">
                 <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border border-gold/60 bg-ink-soft text-xs text-on-ink-muted">
                   [Foto]
                 </div>
