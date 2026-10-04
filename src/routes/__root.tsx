@@ -1,9 +1,11 @@
 import { createRootRoute, HeadContent, Link, Outlet } from "@tanstack/react-router";
+import { MarketBackground } from "@/components/MarketBackground";
 
 export const Route = createRootRoute({
   component: () => (
     <>
       <HeadContent />
+      <MarketBackground />
       <Outlet />
     </>
   ),
