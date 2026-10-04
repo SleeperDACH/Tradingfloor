@@ -133,13 +133,12 @@ function Index() {
   return (
     <div id="top">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-ink px-5 pt-24 pb-24 text-on-ink md:pt-32 md:pb-36">
-        <div className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[480px] -translate-x-1/2 rounded-full bg-gold/10 blur-3xl" />
+      <section className="relative overflow-hidden px-5 pt-24 pb-24 text-on-ink md:pt-32 md:pb-36">
         <div className="reveal relative mx-auto max-w-3xl text-center">
           <Eyebrow>Bersach Tradingfloor · Inner Circle</Eyebrow>
           <h1 className="text-5xl leading-[1.05] md:text-7xl">
             Trade nicht allein.<br />
-            <span className="text-gold-gradient italic">Werde Teil des Inner Circle.</span>
+            <span className="text-gold">Werde Teil des Inner Circle.</span>
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-base text-on-ink-muted md:text-lg">
             Die geschlossene Trading-Community von Bersach: Analysen, Live-Austausch und Struktur für Trader, die es ernst meinen.
@@ -151,7 +150,6 @@ function Index() {
           <p className="mt-6 text-sm text-on-ink-muted">Nur 24,99 € / Monat. Monatlich kündbar.</p>
         </div>
       </section>
-      <div className="gold-line" />
 
       {/* Was ist */}
       <section id="inner-circle" className="px-5 py-24 md:py-32">
@@ -176,7 +174,7 @@ function Index() {
       </section>
 
       {/* Trader */}
-      <section className="bg-ink px-5 py-24 text-on-ink md:py-32">
+      <section className="px-5 py-24 text-on-ink md:py-32">
         <div className="mx-auto max-w-6xl">
           <div className="reveal text-center">
             <Eyebrow>Das Team</Eyebrow>
@@ -201,7 +199,6 @@ function Index() {
           </div>
         </div>
       </section>
-      <div className="gold-line" />
 
       {/* Erfolge */}
       <section className="px-5 py-24 md:py-32">
@@ -213,18 +210,18 @@ function Index() {
           <div className="mt-14 grid gap-10 border-y py-12 text-center sm:grid-cols-3">
             {stats.map((s) => (
               <div key={s.l} className="reveal">
-                <div className="font-serif text-6xl text-gold-gradient"><Counter to={s.v} suffix={s.s} /></div>
+                <div className="text-6xl font-semibold tracking-tight text-gold"><Counter to={s.v} suffix={s.s} /></div>
                 <p className="mt-2 text-sm uppercase tracking-widest text-muted-foreground">{s.l}</p>
               </div>
             ))}
           </div>
           <div className="-mx-5 mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4">
             {[1, 2, 3, 4, 5].map((i) => (
-              <figure key={i} className="w-72 shrink-0 snap-center rounded-md border bg-card p-6 md:w-80">
+              <figure key={i} className="w-72 shrink-0 snap-center rounded-md border p-6 md:w-80">
                 <div className="flex aspect-[4/3] items-center justify-center rounded-sm border border-dashed border-gold/50 text-xs text-muted-foreground">
                   [Screenshot Auszahlung {i}]
                 </div>
-                <blockquote className="mt-5 font-serif text-xl italic">„[Community-Stimme {i}]“</blockquote>
+                <blockquote className="mt-5 text-xl">„[Community-Stimme {i}]“</blockquote>
                 <figcaption className="mt-2 text-xs text-muted-foreground">— [Name / Discord-Name]</figcaption>
               </figure>
             ))}
@@ -234,7 +231,7 @@ function Index() {
       </section>
 
       {/* So funktioniert's */}
-      <section className="bg-card px-5 py-24 md:py-32">
+      <section className="px-5 py-24 md:py-32">
         <div className="mx-auto max-w-5xl">
           <div className="reveal text-center">
             <Eyebrow>In drei Schritten</Eyebrow>
@@ -247,7 +244,7 @@ function Index() {
               ["Loslegen", "Inner-Circle-Bereich freischalten und direkt einsteigen."],
             ].map(([t, d], i) => (
               <li key={t} className="reveal text-center">
-                <div className="font-serif text-7xl text-gold-gradient">0{i + 1}</div>
+                <div className="text-7xl font-semibold tracking-tight text-gold">0{i + 1}</div>
                 <div className="gold-line mx-auto my-5 w-16" />
                 <h3 className="text-2xl">{t}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{d}</p>
@@ -258,12 +255,12 @@ function Index() {
       </section>
 
       {/* Preis */}
-      <section id="preis" className="bg-ink px-5 py-24 text-on-ink md:py-32">
-        <div className="reveal mx-auto max-w-md rounded-md bg-gold-gradient p-px">
+      <section id="preis" className="px-5 py-24 text-on-ink md:py-32">
+        <div className="reveal mx-auto max-w-md rounded-md border border-gold/50">
           <div className="rounded-md bg-ink p-8 text-center md:p-10">
             <Eyebrow>Mitgliedschaft</Eyebrow>
             <h2 className="text-4xl">Inner Circle</h2>
-            <div className="mt-6 font-serif text-6xl text-gold-gradient">24,99 €</div>
+            <div className="mt-6 text-6xl font-semibold tracking-tight text-gold">24,99 €</div>
             <p className="text-sm text-on-ink-muted">pro Monat</p>
             <div className="gold-line my-8" />
             <ul className="space-y-3 text-left text-sm">
@@ -290,7 +287,7 @@ function Index() {
           <div className="mt-12 border-t">
             {faqs.map((f) => (
               <details key={f.q} className="group border-b py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-serif text-xl [&::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-xl [&::-webkit-details-marker]:hidden">
                   {f.q}
                   <span className="text-2xl text-gold transition-transform group-open:rotate-45">+</span>
                 </summary>
@@ -302,23 +299,22 @@ function Index() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-ink px-5 py-24 text-center text-on-ink md:py-32">
-        <div className="gold-line mx-auto mb-12 max-w-xs" />
+      <section className="px-5 py-24 text-center text-on-ink md:py-32">
         <div className="reveal">
-          <h2 className="text-4xl md:text-6xl">Bereit für den <span className="text-gold-gradient italic">nächsten Schritt?</span></h2>
+          <h2 className="text-4xl md:text-6xl">Bereit für den <span className="text-gold">nächsten Schritt?</span></h2>
           <a href={ABLEFY_LINK} target="_blank" rel="noopener noreferrer" className="btn-gold mt-10">Jetzt Mitglied werden</a>
         </div>
       </section>
 
       {/* Disclaimer */}
-      <div className="bg-ink px-5 pb-10 text-on-ink">
+      <div className="px-5 pb-10 text-on-ink">
         <p className="mx-auto max-w-3xl border-t border-gold/20 pt-8 text-center text-xs leading-relaxed text-on-ink-muted">
           Alle Inhalte dienen ausschließlich Bildungs- und Informationszwecken und stellen keine Anlageberatung oder Handelsempfehlung dar. Trading mit Futures ist mit erheblichen Risiken verbunden und kann zum Verlust des eingesetzten Kapitals führen. Es werden keine Gewinne oder Renditen garantiert. Vergangene Ergebnisse sind keine Garantie für zukünftige Ergebnisse.
         </p>
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-gold/20 bg-ink px-5 py-10 text-on-ink">
+      <footer className="border-t border-gold/20 px-5 py-10 text-on-ink">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 md:flex-row md:justify-between">
           <Logo />
           <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-on-ink-muted">
