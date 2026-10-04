@@ -58,7 +58,7 @@ const features = [
 
 const traders = [
   { n: "Leon", r: "Rohstoffe", a: ["[Funded Accounts]", "[Trading-Erfahrung seit …]", "[Auszahlungen]"] },
-  { n: "Felix", r: "Krypto", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
+  { n: "Felix", r: "Krypto", a: ["BTC, ETH & Altcoins", "Swing- & Scalptrades", "Positionsverwaltung mit Eigenkapital"]", "[Erfolg 2]", "[Erfolg 3]"] },
   { n: "William", r: "Indizes & Öl", a: ["[Apex Trader Funding Accounts]", "[Mentor-Programm]", "[Weiterer Erfolg]"] },
   { n: "Sophie", r: "Rohstoffe", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
   { n: "Lennard", r: "Forex & Rohstoffe", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
