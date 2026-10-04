@@ -160,7 +160,7 @@ function Index() {
             <Eyebrow>Die Community</Eyebrow>
             <h2 className="text-4xl md:text-5xl">Was ist der Inner Circle?</h2>
             <p className="mt-5 text-muted-foreground">
-              Ein geschlossener Kreis von Futures-Tradern, die gemeinsam strukturiert arbeiten, sich austauschen und voneinander lernen – begleitet von erfahrenen Tradern. [Einleitungstext anpassen]
+              Ein geschlossener Kreis von Futures-Tradern, die gemeinsam strukturiert arbeiten, sich austauschen und voneinander lernen.
             </p>
           </div>
           <div className="mt-16 grid gap-px overflow-hidden rounded-md border bg-border sm:grid-cols-2 lg:grid-cols-3">
