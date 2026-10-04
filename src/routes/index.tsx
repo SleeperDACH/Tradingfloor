@@ -57,11 +57,11 @@ const features = [
 ];
 
 const traders = [
-  { n: "Leon", r: "[Rolle, z. B. Futures-Trader]", a: ["[Funded Accounts]", "[Trading-Erfahrung seit …]", "[Auszahlungen]"] },
-  { n: "Felix", r: "[Rolle]", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
-  { n: "William", r: "Selbstständiger Futures-Trader", a: ["[Apex Trader Funding Accounts]", "[Mentor-Programm]", "[Weiterer Erfolg]"] },
-  { n: "Sophie", r: "[Rolle]", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
-  { n: "Lennard", r: "[Rolle]", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
+  { n: "Leon", r: "Rohstoffe", a: ["[Funded Accounts]", "[Trading-Erfahrung seit …]", "[Auszahlungen]"] },
+  { n: "Felix", r: "Krypto", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
+  { n: "William", r: "Indizes & Öl", a: ["[Apex Trader Funding Accounts]", "[Mentor-Programm]", "[Weiterer Erfolg]"] },
+  { n: "Sophie", r: "Rohstoffe", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
+  { n: "Lennard", r: "Forex & Rohstoffe", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
 ];
 
 const stats = [
