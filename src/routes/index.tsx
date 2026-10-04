@@ -48,7 +48,7 @@ const Icon = ({ d }: { d: string }) => (
 );
 
 const features = [
-  { t: "Exklusiver Discord-Bereich", d: "Dein geschlossener Bereich als Mitglied: Verfolge unsere Signale, stelle deine Fragen, tausche dich mit anderen Tradern aus und erhalte Feedback erfahrener Trader zu deinen eigenen Trades.", i: "M4 5h16v11H8l-4 4V5z" },
+  { t: "Exklusiver Discord-Bereich", d: "Dein geschlossener Bereich als Mitglied: Verfolge unsere Analysen und Setups, stelle deine Fragen, tausche dich mit anderen Tradern aus und erhalte Feedback erfahrener Trader zu deinen eigenen Trades.", i: "M4 5h16v11H8l-4 4V5z" },
   { t: "[Marktanalysen täglich/wöchentlich]", d: "Strukturierte Vorbereitung auf die Session mit klaren Levels.", i: "M3 20h18M6 16l4-5 3 3 5-7" },
   { t: "[Live-Sessions & Trade-Reviews]", d: "Gemeinsam traden, Entscheidungen nachvollziehen, besser werden.", i: "M15 10l5-3v10l-5-3M3 6h12v12H3z" },
   { t: "Prop-Firm & Risikomanagement", d: "Austausch zu Challenges, Regeln und sauberem Risiko.", i: "M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" },
