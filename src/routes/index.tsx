@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import logoLight from "@/assets/bersach-logo-light.svg";
 import logoDark from "@/assets/bersach-logo.svg";
 
-const ABLEFY_LINK = "#"; // [ABLEFY-LINK] hier einsetzen
+const ABLEFY_LINK = "https://myablefy.com/s/bersach/bersach-tradingfloor-inner-circle-b0dd80af/payment";
 
 export const Route = createFileRoute("/")({
   head: () => ({
