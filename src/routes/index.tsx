@@ -66,7 +66,7 @@ const markets = {
 const traders = [
   { n: "Leon", r: "Rohstoffe", m: [markets.gold], a: ["Gold, Silber & Öl", "Saubere Einstiege auf niedrigen Timeframes", "Volumen & Divergenzen"] },
   { n: "Felix", r: "Krypto", m: [markets.crypto], a: ["BTC, ETH & Altcoins", "Swing- & Scalptrades", "Positionsverwaltung mit Eigenkapital"] },
-  { n: "William", r: "Indizes & Öl", m: [markets.index, markets.oil], a: ["[Apex Trader Funding Accounts]", "[Mentor-Programm]", "[Weiterer Erfolg]"] },
+  { n: "William", r: "Indizes & Öl", m: [markets.index, markets.oil], a: ["S&P 500 & Öl", "Zahlreiche Auszahlungen", "Klare Regeln für Einstiege nach Trend"] },
 ];
 
 const included = [
