@@ -284,9 +284,6 @@ function Index() {
             <a href="https://www.instagram.com/bersach.dresden/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-gold-light">
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.5}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" /></svg>
             </a>
-            <a href="#" aria-label="TikTok [Link einfügen]" className="hover:text-gold-light">
-              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor"><path d="M16.5 3c.3 2.2 1.6 3.6 3.8 3.8v3.1c-1.4.1-2.6-.3-3.8-1v6.3c0 3.5-2.8 5.8-6 5.8-3.3 0-5.8-2.6-5.8-5.8 0-3.6 3.2-6.2 6.8-5.6v3.2c-1.6-.4-3.6.6-3.6 2.4 0 1.5 1.2 2.6 2.6 2.6 1.6 0 2.8-1.1 2.8-3V3h3.2z" /></svg>
-            </a>
           </div>
         </div>
         <p className="mt-8 text-center text-xs text-on-ink-muted">©️ {new Date().getFullYear()} Bersach Tradingfloor</p>
