@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import logoLight from "@/assets/bersach-logo-light.svg";
 import logoDark from "@/assets/bersach-logo.svg";
 
@@ -56,18 +56,17 @@ const features = [
   { t: "Direkter Draht zu den Tradern", d: "Fragen stellen und Antworten von erfahrenen Tradern bekommen.", i: "M8 12h8M12 8v8M12 21a9 9 0 100-18 9 9 0 000 18z" },
 ];
 
-const traders = [
-  { n: "Leon", r: "Rohstoffe", a: ["[Funded Accounts]", "[Trading-Erfahrung seit …]", "[Auszahlungen]"] },
-  { n: "Felix", r: "Krypto", a: ["BTC, ETH & Altcoins", "Swing- & Scalptrades", "Positionsverwaltung mit Eigenkapital"] },
-  { n: "William", r: "Indizes & Öl", a: ["[Apex Trader Funding Accounts]", "[Mentor-Programm]", "[Weiterer Erfolg]"] },
-  { n: "Sophie", r: "Rohstoffe", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
-  { n: "Lennard", r: "Forex & Rohstoffe", a: ["[Erfolg 1]", "[Erfolg 2]", "[Erfolg 3]"] },
-];
+const markets = {
+  crypto: "M12 3a9 9 0 100 18 9 9 0 000-18zM9.5 7.5v9M9.5 7.5h3.25a2.25 2.25 0 010 4.5H9.5M9.5 12h3.75a2.25 2.25 0 010 4.5H9.5M11 6v1.5M13 6v1.5M11 16.5V18M13 16.5V18",
+  gold: "M2 20l1.5-5h7l1.5 5zM12 20l1.5-5h7l1.5 5zM7 15l1.5-5h7l1.5 5",
+  index: "M3 3v18h18M6.5 15.5l4-4.5 3 3 5-6.5M15 7.5h3.5V11",
+  oil: "M12 3s-6 7-6 11a6 6 0 0012 0c0-4-6-11-6-11z",
+};
 
-const stats = [
-  { v: 500, s: "+", l: "[X] Mitglieder" },
-  { v: 120, s: "+", l: "[X] bestandene Challenges" },
-  { v: 80, s: "+", l: "[X] Auszahlungen" },
+const traders = [
+  { n: "Leon", r: "Rohstoffe", m: [markets.gold], a: ["[Funded Accounts]", "[Trading-Erfahrung seit …]", "[Auszahlungen]"] },
+  { n: "Felix", r: "Krypto", m: [markets.crypto], a: ["BTC, ETH & Altcoins", "Swing- & Scalptrades", "Positionsverwaltung mit Eigenkapital"] },
+  { n: "William", r: "Indizes & Öl", m: [markets.index, markets.oil], a: ["[Apex Trader Funding Accounts]", "[Mentor-Programm]", "[Weiterer Erfolg]"] },
 ];
 
 const included = [
@@ -76,7 +75,7 @@ const included = [
   "[Live-Sessions & Trade-Reviews]",
   "Prop-Firm- & Risikomanagement-Austausch",
   "Trading-Psychologie & Disziplin",
-  "Direkter Kontakt zu Leon, Felix, William, Sophie & Lennard",
+  "Direkter Kontakt zu Leon, Felix & William",
 ];
 
 const faqs = [
@@ -87,29 +86,6 @@ const faqs = [
   { q: "Welche Märkte werden behandelt?", a: "[z. B. Index-Futures wie NQ, ES …]" },
   { q: "Wie läuft die Zahlung ab?", a: "Die Zahlung erfolgt sicher über Ablefy – per Kreditkarte, PayPal und weiteren Methoden." },
 ];
-
-function Counter({ to, suffix }: { to: number; suffix: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [n, setN] = useState(0);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([e]) => {
-      if (!e?.isIntersecting) return;
-      io.disconnect();
-      const start = performance.now();
-      const step = (t: number) => {
-        const p = Math.min((t - start) / 1600, 1);
-        setN(Math.round(to * (1 - Math.pow(1 - p, 3))));
-        if (p < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    });
-    io.observe(el);
-    return () => io.disconnect();
-  }, [to]);
-  return <span ref={ref}>{n}{suffix}</span>;
-}
 
 function CookieBanner() {
   const [show, setShow] = useState(false);
@@ -193,8 +169,10 @@ function Index() {
           <div className="mt-16 flex flex-wrap justify-center gap-6">
             {traders.map((t) => (
               <article key={t.n} className="reveal w-full rounded-md border border-gold/40 p-8 md:w-[calc((100%-3rem)/3)] text-center transition-colors hover:border-gold">
-                <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border border-gold/60 bg-ink-soft text-xs text-on-ink-muted">
-                  [Foto]
+                <div className="flex h-16 items-center justify-center gap-4 text-gold" aria-hidden="true">
+                  {t.m.map((d) => (
+                    <svg key={d} viewBox="0 0 24 24" className="h-14 w-14" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round"><path d={d} /></svg>
+                  ))}
                 </div>
                 <h3 className="mt-6 text-3xl">{t.n}</h3>
                 <p className="mt-1 text-sm text-gold-light">{t.r}</p>
@@ -207,36 +185,6 @@ function Index() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Erfolge */}
-      <section className="px-5 py-24 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <div className="reveal text-center">
-            <Eyebrow>Ergebnisse</Eyebrow>
-            <h2 className="text-4xl md:text-5xl">Erfolge der Community</h2>
-          </div>
-          <div className="mt-14 grid gap-10 border-y py-12 text-center sm:grid-cols-3">
-            {stats.map((s) => (
-              <div key={s.l} className="reveal">
-                <div className="text-6xl font-semibold tracking-tight text-gold"><Counter to={s.v} suffix={s.s} /></div>
-                <p className="mt-2 text-sm uppercase tracking-widest text-muted-foreground">{s.l}</p>
-              </div>
-            ))}
-          </div>
-          <div className="-mx-5 mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <figure key={i} className="w-72 shrink-0 snap-center rounded-md border p-6 md:w-80">
-                <div className="flex aspect-[4/3] items-center justify-center rounded-sm border border-dashed border-gold/50 text-xs text-muted-foreground">
-                  [Screenshot Auszahlung {i}]
-                </div>
-                <blockquote className="mt-5 text-xl">„[Community-Stimme {i}]“</blockquote>
-                <figcaption className="mt-2 text-xs text-muted-foreground">— [Name / Discord-Name]</figcaption>
-              </figure>
-            ))}
-          </div>
-          <p className="mt-2 text-center text-xs text-muted-foreground">← Wischen für mehr →</p>
         </div>
       </section>
 
