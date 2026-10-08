@@ -50,7 +50,7 @@ const Icon = ({ d }: { d: string }) => (
 const features = [
   { t: "Exklusiver Discord-Bereich", d: ["Analysen und Setups verfolgen", "Fragen direkt stellen", "Mit anderen Tradern austauschen", "Feedback erfahrener Trader zu deinen eigenen Trades"], i: "M4 5h16v11H8l-4 4V5z" },
   { t: "Tägliche Marktanalysen", d: "Jeden Tag ein klarer Blick auf die Märkte – mit Tradeideen, die sich an der aktuellen Marktlage orientieren.", i: "M3 20h18M6 16l4-5 3 3 5-7" },
-  { t: "[Live-Sessions & Trade-Reviews]", d: "Gemeinsam traden, Entscheidungen nachvollziehen, besser werden.", i: "M15 10l5-3v10l-5-3M3 6h12v12H3z" },
+  { t: "Live-Sessions & Trade-Reviews", d: "Wöchentliches Livetrading, täglicher Austausch und direktes Feedback von erfahrenen Tradern zu deinen Trades.", i: "M15 10l5-3v10l-5-3M3 6h12v12H3z" },
   { t: "Prop-Firm & Risikomanagement", d: "Austausch zu Challenges, Regeln und sauberem Risiko.", i: "M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" },
   { t: "Trading-Psychologie & Disziplin", d: "Routinen und Mindset für konstante Ergebnisse.", i: "M12 3a6 6 0 016 6c0 3-2 4-2 7H8c0-3-2-4-2-7a6 6 0 016-6zM9 20h6" },
   { t: "Direkter Draht zu den Tradern", d: "Fragen stellen und Antworten von erfahrenen Tradern bekommen.", i: "M8 12h8M12 8v8M12 21a9 9 0 100-18 9 9 0 000 18z" },
@@ -72,7 +72,7 @@ const traders = [
 const included = [
   "Zugang zum exklusiven Discord-Bereich",
   "Tägliche Marktanalysen mit Tradeideen",
-  "[Live-Sessions & Trade-Reviews]",
+  "Wöchentliches Livetrading & Trade-Reviews",
   "Prop-Firm- & Risikomanagement-Austausch",
   "Trading-Psychologie & Disziplin",
   "Direkter Kontakt zu Leon, Felix & William",
