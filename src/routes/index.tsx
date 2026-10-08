@@ -81,7 +81,7 @@ const included = [
 const faqs = [
   { q: "Wie kann ich kündigen?", a: "Die Mitgliedschaft ist monatlich kündbar – direkt über dein Ablefy-Kundenkonto. [Details ergänzen]" },
   { q: "Wie komme ich auf den Server?", a: "Nach dem Kauf erhältst du per E-Mail deinen persönlichen Discord-Einladungslink. Damit wird dein Inner-Circle-Bereich freigeschaltet." },
-  { q: "Brauche ich Vorkenntnisse?", a: "Grundkenntnisse im Futures-Trading sind hilfreich. [Ergänzen, ob auch Einsteiger willkommen sind]" },
+  { q: "Brauche ich Vorkenntnisse?", a: "Nein. Anfänger sind bei uns ausdrücklich willkommen. Durch den direkten Austausch mit erfahrenen Tradern lernst du schnell und praxisnah – Fragen sind jederzeit erwünscht." },
   { q: "Ist das Anlageberatung?", a: "Nein. Alle Inhalte dienen ausschließlich der Bildung und dem Austausch. Es gibt keine Handelsempfehlungen." },
   { q: "Welche Märkte werden behandelt?", a: "[z. B. Index-Futures wie NQ, ES …]" },
   { q: "Wie läuft die Zahlung ab?", a: "Die Zahlung erfolgt sicher über Ablefy – per Kreditkarte, PayPal und weiteren Methoden." },
