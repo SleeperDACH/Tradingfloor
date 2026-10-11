@@ -23,4 +23,4 @@ npm run build    # Produktions-Build nach dist/
 
 ## Deployment
 
-Jeder Push auf `main` wird per GitHub Actions auf GitHub Pages veröffentlicht – erreichbar unter https://bersach-tradingfloor.de (DNS bei All-Inkl).
+Jeder Push auf `main` wird per GitHub Actions auf GitHub Pages veröffentlicht.
