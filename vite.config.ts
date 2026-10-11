@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import { fileURLToPath, URL } from "node:url";
 
-// GitHub Pages serves the site under /<repo>/
+// Served from the root of bersach-tradingfloor.de (custom domain on GitHub Pages)
 export default defineConfig({
   base: process.env.BASE_PATH ?? "/",
   plugins: [tanstackRouter({ target: "react", autoCodeSplitting: true }), react(), tailwindcss()],
