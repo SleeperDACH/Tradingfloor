@@ -49,7 +49,8 @@
 
 @layer components {
   .btn-gold,
-  .btn-outline-gold {
+  .btn-outline-gold,
+  .btn-discord {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -73,6 +74,14 @@
   .btn-outline-gold:hover {
     border-color: var(--color-gold);
     background: transparent;
+  }
+
+  .btn-discord {
+    background: #5865f2;
+    color: #fff;
+  }
+  .btn-discord:hover {
+    background: #4752c4;
   }
 
   .reveal {
