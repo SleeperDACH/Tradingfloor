@@ -83,7 +83,7 @@ const included = [
 
 const faqs = [
   { q: "Wie kann ich kündigen?", a: "Die Mitgliedschaft ist monatlich kündbar – direkt über dein Ablefy-Kundenkonto. [Details ergänzen]" },
-  { q: "Wie komme ich auf den Server?", a: "Nach dem Kauf erhältst du per E-Mail deinen persönlichen Discord-Einladungslink. Damit wird dein Inner-Circle-Bereich freigeschaltet." },
+  { q: "Wie komme ich auf den Server?", a: "Über den Button „Discord-Server beitreten“ kommst du jederzeit auf unseren Server. Den Inner-Circle-Bereich schalten wir nach dem Kauf frei – deinen persönlichen Einladungslink dafür erhältst du per E-Mail." },
   { q: "Brauche ich Vorkenntnisse?", a: "Nein. Anfänger sind bei uns ausdrücklich willkommen. Durch den direkten Austausch mit erfahrenen Tradern lernst du schnell und praxisnah – Fragen sind jederzeit erwünscht." },
   { q: "Ist das Anlageberatung?", a: "Nein. Wir dokumentieren unsere eigenen Trades transparent, damit du Entscheidungen nachvollziehen und daraus lernen kannst. Das ist jedoch keine Anlageberatung und kein Financial Advice – jedes Mitglied handelt eigenverantwortlich." },
   { q: "Welche Märkte werden behandelt?", a: "Krypto (BTC, ETH & Altcoins), Rohstoffe wie Gold, Silber und Öl sowie Indizes wie den S&P 500." },
