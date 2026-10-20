@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 
 // Fixed canvas behind the whole page: a slow, endlessly scrolling candlestick
-// chart with a moving average, drawn faintly so content stays readable.
+// chart with a moving average, drawn faintly so content stays readable. It is
+// masked towards the edges and recedes further once the hero is scrolled past.
 
 const CANDLE_W = 7;
 const GAP = 7;
@@ -133,17 +134,24 @@ export function MarketBackground() {
       }
     };
 
+    const onScroll = () => {
+      canvas.style.opacity = String(1 - 0.6 * Math.min(window.scrollY / window.innerHeight, 1));
+    };
+
     resize();
+    onScroll();
     window.addEventListener("resize", resize);
+    window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("visibilitychange", onVisibility);
     onVisibility();
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", onScroll);
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
-  return <canvas ref={ref} aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 h-full w-full" />;
+  return <canvas ref={ref} aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 h-full w-full transition-opacity duration-300 [mask-image:radial-gradient(120%_85%_at_50%_45%,#000_35%,transparent_85%)]" />;
 }

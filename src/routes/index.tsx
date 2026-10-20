@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
+import { delay, ScrollRevealText, useReveal } from "@/components/motion";
 import logoLight from "@/assets/bersach-logo-light.svg";
 import logoDark from "@/assets/bersach-logo.svg";
 
@@ -19,18 +20,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-function useReveal() {
-  useEffect(() => {
-    const els = document.querySelectorAll(".reveal");
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && (e.target.classList.add("is-visible"), io.unobserve(e.target))),
-      { threshold: 0.12 },
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-}
 
 function Logo({ light = true }: { light?: boolean }) {
   return (
@@ -101,11 +90,85 @@ const faqs = [
   { q: "Wie läuft die Zahlung ab?", a: "Die Zahlung erfolgt sicher über Ablefy – per Kreditkarte, PayPal und weiteren Methoden." },
 ];
 
+const nav = [
+  ["#inner-circle", "Community"],
+  ["#team", "Team"],
+  ["#ablauf", "Ablauf"],
+  ["#preis", "Preis"],
+  ["#faq", "FAQ"],
+] as const;
+
+function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <header className={`fixed inset-x-0 top-0 z-40 border-b transition-colors duration-300 ${scrolled ? "border-white/[0.06] bg-ink/70 backdrop-blur-xl" : "border-transparent"}`}>
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+        <Logo />
+        <nav className="hidden gap-8 text-sm text-on-ink-muted md:flex">
+          {nav.map(([href, label]) => (
+            <a key={href} href={href} className="transition-colors hover:text-on-ink">{label}</a>
+          ))}
+        </nav>
+        <a href="#preis" className="btn-gold !px-4 !py-2 text-sm">Jetzt beitreten</a>
+      </div>
+    </header>
+  );
+}
+
+// Pill at the bottom of the screen once the hero is gone; hides again near the
+// price and final CTA so it never doubles up with them.
+function FloatingCta() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const visible = new Map<Element, boolean>();
+    const ids = ["hero", "preis", "final"];
+    const update = () => {
+      const consent = !!localStorage.getItem("cookie-consent");
+      setShow(consent && visible.size === ids.length && ![...visible.values()].some(Boolean));
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => visible.set(e.target, e.isIntersecting));
+      update();
+    });
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+    window.addEventListener("cookie-consent", update);
+    return () => {
+      io.disconnect();
+      window.removeEventListener("cookie-consent", update);
+    };
+  }, []);
+  return (
+    <a
+      href="#preis"
+      aria-hidden={!show}
+      tabIndex={show ? 0 : -1}
+      className={`fixed bottom-5 left-1/2 z-40 flex -translate-x-1/2 items-center gap-4 rounded-full border border-white/10 bg-ink-soft/80 py-2 pr-2 pl-5 text-on-ink shadow-2xl backdrop-blur-xl transition-all duration-500 ${show ? "opacity-100" : "pointer-events-none translate-y-6 opacity-0"}`}
+    >
+      <span className="leading-tight">
+        <span className="block text-sm font-medium whitespace-nowrap">Inner Circle</span>
+        <span className="block text-xs whitespace-nowrap text-on-ink-muted">24,99 € / Monat · monatlich kündbar</span>
+      </span>
+      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold text-ink">
+        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      </span>
+    </a>
+  );
+}
+
 function CookieBanner() {
   const [show, setShow] = useState(false);
   useEffect(() => { setShow(!localStorage.getItem("cookie-consent")); }, []);
   if (!show) return null;
-  const close = (v: string) => { localStorage.setItem("cookie-consent", v); setShow(false); };
+  const close = (v: string) => { localStorage.setItem("cookie-consent", v); setShow(false); window.dispatchEvent(new Event("cookie-consent")); };
   return (
     <div className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-xl rounded-md border border-gold/40 bg-ink p-5 text-on-ink shadow-2xl md:inset-x-auto md:right-6 md:bottom-6">
       <p className="text-sm text-on-ink-muted">
@@ -124,40 +187,56 @@ function Index() {
   useReveal();
   return (
     <div id="top">
+      <Header />
+
       {/* Hero */}
-      <section className="relative overflow-hidden px-5 pt-24 pb-24 text-on-ink md:pt-32 md:pb-36">
-        <div className="reveal relative mx-auto max-w-3xl text-center">
-          <Eyebrow>Bersach Tradingfloor · Inner Circle</Eyebrow>
+      <section id="hero" className="relative isolate overflow-hidden px-5 pt-36 pb-28 text-on-ink md:pt-48 md:pb-40">
+        <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-x-0 top-0 -z-10 h-[90%]" />
+        <div className="relative mx-auto max-w-3xl text-center">
+          <p className="word-in mx-auto mb-8 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs tracking-wide text-on-ink-muted backdrop-blur" style={delay(0)}>
+            <span className="relative flex h-1.5 w-1.5"><span className="absolute inset-0 animate-ping rounded-full bg-gold opacity-60" /><span className="relative h-1.5 w-1.5 rounded-full bg-gold" /></span>
+            Bersach Tradingfloor · Inner Circle
+          </p>
           <h1 className="text-5xl leading-[1.05] md:text-7xl">
-            Trade nicht allein.<br />
-            <span className="text-gold">Werde Teil des Inner Circle.</span>
+            {"Trade nicht allein.".split(" ").map((w, i) => (
+              <span key={w} className="word-in inline-block" style={delay(i + 1)}>{w}&nbsp;</span>
+            ))}
+            <br />
+            {"Werde Teil des".split(" ").map((w, i) => (
+              <span key={w} className="word-in inline-block" style={delay(i + 4)}>{w}&nbsp;</span>
+            ))}
+            <span className="word-in accent inline-block" style={delay(7)}>Inner Circle.</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base text-on-ink-muted md:text-lg">
+          <p className="word-in mx-auto mt-7 max-w-xl text-base text-on-ink-muted md:text-lg" style={delay(9)}>
             Die geschlossene Trading-Community von Bersach: Analysen, Live-Austausch und Struktur für Trader, die es ernst meinen.
           </p>
-          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="word-in mt-10 flex flex-col justify-center gap-3 sm:flex-row" style={delay(10)}>
             <a href="#preis" className="btn-gold">Jetzt beitreten</a>
             <a href="#inner-circle" className="btn-outline-gold">Mehr erfahren</a>
           </div>
-          <p className="mt-6 text-sm text-on-ink-muted">Nur 24,99 € / Monat. Monatlich kündbar.</p>
-          <DiscordButton className="mt-8 w-full sm:w-auto" />
+          <p className="word-in mt-6 text-sm text-on-ink-muted" style={delay(11)}>Nur 24,99 € / Monat. Monatlich kündbar.</p>
+          <div className="word-in" style={delay(12)}>
+            <DiscordButton className="mt-8 w-full sm:w-auto" />
+          </div>
         </div>
       </section>
 
       {/* Was ist */}
       <section id="inner-circle" className="px-5 py-24 md:py-32">
         <div className="mx-auto max-w-6xl">
-          <div className="reveal mx-auto max-w-2xl text-center">
-            <Eyebrow>Die Community</Eyebrow>
-            <h2 className="text-4xl md:text-5xl">Was ist der Inner Circle?</h2>
-            <p className="mt-5 text-muted-foreground">
-              Ein geschlossener Kreis von Futures-Tradern, die gemeinsam strukturiert arbeiten, sich austauschen und voneinander lernen.
-            </p>
+          <Eyebrow>Was ist der Inner Circle?</Eyebrow>
+          <ScrollRevealText
+            className="max-w-5xl text-3xl leading-[1.2] font-medium tracking-tight md:text-5xl"
+            text="Ein geschlossener Kreis von *Futures-Tradern,* die gemeinsam strukturiert arbeiten, sich austauschen und *voneinander* lernen. Mit täglichen Analysen, Live-Sessions und direktem Draht zu erfahrenen Tradern."
+          />
+          <div className="reveal mt-32 md:mt-40">
+            <Eyebrow>Was dich erwartet</Eyebrow>
+            <h2 className="text-4xl md:text-6xl">Alles, was du für deinen <span className="accent">Trading-Alltag</span> brauchst.</h2>
           </div>
-          <div className="mt-16 grid gap-px overflow-hidden rounded-md border bg-border sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
-              <div key={f.t} className="reveal bg-background p-8 transition-colors hover:bg-card">
-                <div className="text-gold"><Icon d={f.i} /></div>
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map((f, i) => (
+              <div key={f.t} className="reveal spotlight card p-8" style={delay(i % 3)}>
+                <div className="flex items-center justify-between text-gold"><Icon d={f.i} /><span className="text-xs text-on-ink-muted">0{i + 1}</span></div>
                 <h3 className="mt-5 text-2xl">{f.t}</h3>
                 {Array.isArray(f.d) ? (
                   <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
@@ -175,15 +254,15 @@ function Index() {
       </section>
 
       {/* Trader */}
-      <section className="px-5 py-24 text-on-ink md:py-32">
+      <section id="team" className="px-5 py-24 text-on-ink md:py-32">
         <div className="mx-auto max-w-6xl">
           <div className="reveal text-center">
             <Eyebrow>Das Team</Eyebrow>
-            <h2 className="text-4xl md:text-5xl">Die Trader hinter Bersach</h2>
+            <h2 className="text-4xl md:text-6xl">Die Trader hinter <span className="accent">Bersach</span></h2>
           </div>
           <div className="mt-16 flex flex-wrap justify-center gap-6">
-            {traders.map((t) => (
-              <article key={t.n} className="reveal w-full rounded-md border border-gold/40 p-8 md:w-[calc((100%-3rem)/3)] text-center transition-colors hover:border-gold">
+            {traders.map((t, i) => (
+              <article key={t.n} className="reveal spotlight card w-full p-8 text-center md:w-[calc((100%-3rem)/3)]" style={delay(i)}>
                 <div className="flex h-16 items-center justify-center gap-4 text-gold" aria-hidden="true">
                   {t.m.map((d) => (
                     <svg key={d} viewBox="0 0 24 24" className="h-14 w-14" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round"><path d={d} /></svg>
@@ -204,11 +283,11 @@ function Index() {
       </section>
 
       {/* So funktioniert's */}
-      <section className="px-5 py-24 md:py-32">
+      <section id="ablauf" className="px-5 py-24 md:py-32">
         <div className="mx-auto max-w-5xl">
           <div className="reveal text-center">
             <Eyebrow>In drei Schritten</Eyebrow>
-            <h2 className="text-4xl md:text-5xl">So funktioniert's</h2>
+            <h2 className="text-4xl md:text-6xl">So <span className="accent">funktioniert's</span></h2>
           </div>
           <ol className="mt-16 grid gap-10 md:grid-cols-3">
             {[
@@ -216,8 +295,8 @@ function Index() {
               ["Einladung erhalten", "Du bekommst deinen persönlichen Discord-Einladungslink."],
               ["Loslegen", "Inner-Circle-Bereich freischalten und direkt einsteigen."],
             ].map(([t, d], i) => (
-              <li key={t} className="reveal text-center">
-                <div className="text-7xl font-semibold tracking-tight text-gold">0{i + 1}</div>
+              <li key={t} className="reveal text-center" style={delay(i, 140)}>
+                <div className="accent text-8xl">0{i + 1}</div>
                 <div className="gold-line mx-auto my-5 w-16" />
                 <h3 className="text-2xl">{t}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{d}</p>
@@ -229,10 +308,10 @@ function Index() {
 
       {/* Preis */}
       <section id="preis" className="px-5 py-24 text-on-ink md:py-32">
-        <div className="reveal mx-auto max-w-md rounded-md border border-gold/50">
-          <div className="rounded-md bg-ink p-8 text-center md:p-10">
+        <div className="reveal price-card mx-auto max-w-md">
+          <div className="spotlight card p-8 text-center md:p-10">
             <Eyebrow>Mitgliedschaft</Eyebrow>
-            <h2 className="text-4xl">Inner Circle</h2>
+            <h2 className="text-4xl">Inner <span className="accent">Circle</span></h2>
             <div className="mt-6 text-6xl font-semibold tracking-tight text-gold">24,99 €</div>
             <p className="text-sm text-on-ink-muted">pro Monat</p>
             <div className="gold-line my-8" />
@@ -251,15 +330,15 @@ function Index() {
       </section>
 
       {/* FAQ */}
-      <section className="px-5 py-24 md:py-32">
+      <section id="faq" className="px-5 py-24 md:py-32">
         <div className="mx-auto max-w-2xl">
           <div className="reveal text-center">
             <Eyebrow>Fragen</Eyebrow>
-            <h2 className="text-4xl md:text-5xl">Häufige Fragen</h2>
+            <h2 className="text-4xl md:text-6xl">Häufige <span className="accent">Fragen</span></h2>
           </div>
           <div className="mt-12 border-t">
-            {faqs.map((f) => (
-              <details key={f.q} className="group border-b py-5">
+            {faqs.map((f, i) => (
+              <details key={f.q} className="reveal group border-b py-5" style={delay(i, 60)}>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-xl [&::-webkit-details-marker]:hidden">
                   {f.q}
                   <span className="text-2xl text-gold transition-transform group-open:rotate-45">+</span>
@@ -272,9 +351,10 @@ function Index() {
       </section>
 
       {/* Final CTA */}
-      <section className="px-5 py-24 text-center text-on-ink md:py-32">
+      <section id="final" className="relative isolate overflow-hidden px-5 py-28 text-center text-on-ink md:py-40">
+        <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-0 -z-10 rotate-180" />
         <div className="reveal">
-          <h2 className="text-4xl md:text-6xl">Bereit für den <span className="text-gold">nächsten Schritt?</span></h2>
+          <h2 className="text-5xl md:text-7xl">Bereit für den <span className="accent">nächsten Schritt?</span></h2>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a href={ABLEFY_LINK} target="_blank" rel="noopener noreferrer" className="btn-gold">Jetzt Mitglied werden</a>
             <DiscordButton />
@@ -310,6 +390,7 @@ function Index() {
         <p className="mt-8 text-center text-xs text-on-ink-muted">©️ {new Date().getFullYear()} Bersach Tradingfloor</p>
       </footer>
 
+      <FloatingCta />
       <CookieBanner />
     </div>
   );
