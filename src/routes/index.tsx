@@ -61,17 +61,13 @@ const features = [
 
 const markets = {
   crypto: "M12 3a9 9 0 100 18 9 9 0 000-18zM9.5 7.5v9M9.5 7.5h3.25a2.25 2.25 0 010 4.5H9.5M9.5 12h3.75a2.25 2.25 0 010 4.5H9.5M11 6v1.5M13 6v1.5M11 16.5V18M13 16.5V18",
-  gold: "M2 20l1.5-5h7l1.5 5zM12 20l1.5-5h7l1.5 5zM7 15l1.5-5h7l1.5 5",
   index: "M3 3v18h18M6.5 15.5l4-4.5 3 3 5-6.5M15 7.5h3.5V11",
   oil: "M12 3s-6 7-6 11a6 6 0 0012 0c0-4-6-11-6-11z",
-  forex: "M4 8h14l-4-4M20 16H6l4 4",
 };
 
 const traders = [
-  { n: "Leon", r: "Rohstoffe", m: [markets.gold], a: ["Gold, Silber & Öl", "Saubere Einstiege auf niedrigen Timeframes", "Volumen & Divergenzen"] },
   { n: "Felix", r: "Krypto", m: [markets.crypto], a: ["BTC, ETH & Altcoins", "Swing- & Scalptrades", "Positionsverwaltung mit Eigenkapital"] },
   { n: "William", r: "Indizes & Öl", m: [markets.index, markets.oil], a: ["S&P 500 & Öl", "Zahlreiche Auszahlungen", "Klare Regeln für Einstiege nach Trend"] },
-  { n: "Lennard", r: "Forex", m: [markets.forex], a: ["Breite Auswahl an Forex-Paaren", "Trades auf höheren Timeframes (HTF)", "Trading mit Eigen- & Fremdkapital"] },
 ];
 
 const included = [
@@ -80,7 +76,7 @@ const included = [
   "Wöchentliches Livetrading & Trade-Reviews",
   "Prop-Firm- & Risikomanagement-Austausch",
   "Trading-Psychologie & Disziplin",
-  "Direkter Kontakt zu Leon, Felix, William & Lennard",
+  "Direkter Kontakt zu Felix & William",
 ];
 
 const faqs = [
@@ -88,7 +84,7 @@ const faqs = [
   { q: "Wie komme ich auf den Server?", a: "Über den Button „Discord-Server beitreten“ kommst du jederzeit auf unseren Server. Den Inner-Circle-Bereich schalten wir nach dem Kauf frei – deinen persönlichen Einladungslink dafür erhältst du per E-Mail." },
   { q: "Brauche ich Vorkenntnisse?", a: "Nein. Anfänger sind bei uns ausdrücklich willkommen. Durch den direkten Austausch mit erfahrenen Tradern lernst du schnell und praxisnah – Fragen sind jederzeit erwünscht." },
   { q: "Ist das Anlageberatung?", a: "Nein. Wir dokumentieren unsere eigenen Trades transparent, damit du Entscheidungen nachvollziehen und daraus lernen kannst. Das ist jedoch keine Anlageberatung und kein Financial Advice – jedes Mitglied handelt eigenverantwortlich." },
-  { q: "Welche Märkte werden behandelt?", a: "Krypto (BTC, ETH & Altcoins), Rohstoffe wie Gold, Silber und Öl, Indizes wie den S&P 500 sowie Forex (Devisen)." },
+  { q: "Welche Märkte werden behandelt?", a: "Krypto (BTC, ETH & Altcoins), Indizes wie den S&P 500 sowie Öl." },
   { q: "Wie läuft die Zahlung ab?", a: "Die Zahlung erfolgt sicher über Ablefy – per Kreditkarte, PayPal und weiteren Methoden." },
 ];
 
@@ -262,7 +258,7 @@ function Index() {
             <Eyebrow>Das Team</Eyebrow>
             <h2 className="text-4xl md:text-6xl">Die Trader hinter <span className="accent">Bersach</span></h2>
           </div>
-          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto mt-16 grid max-w-3xl gap-6 sm:grid-cols-2">
             {traders.map((t, i) => (
               <article key={t.n} className="reveal spotlight card p-8 text-center" style={delay(i)}>
                 <div className="flex h-16 items-center justify-center gap-4 text-gold" aria-hidden="true">
